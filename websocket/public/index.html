@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <textarea id="output" style="width: 400px; height: 200px"></textarea>
+      <button onclick="connect()">open</button>
+      <button onclick="closeWs()">close</button>
+    </div>
+    <div>
+      <form onsubmit="send(event)">
+        <input type="text" id="input" />
+        <button>send</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    var socket;
+    function connect() {
+      socket = new WebSocket("ws://localhost:3000");
+      socket.addEventListener("open", (event) => {
+        socket.send("from client");
+        addOutput("opened");
+      });
+      socket.addEventListener("message", (event) => {
+        addOutput(event.data);
+      });
+      socket.onclose = function () {
+        addOutput("closed");
+        socket = null;
+      };
+    }
+
+    function closeWs() {
+      console.log("close");
+      if (socket) socket.close();
+    }
+
+    connect();
+
+    const output = document.getElementById("output");
+
+    function addOutput(msg) {
+      output.textContent += "\n" + msg;
+    }
+
+    function send(event) {
+      event.preventDefault();
+      const inputElement = document.getElementById("input");
+      const input = inputElement.value;
+      console.log(typeof input);
+
+      if (socket) {
+        socket.send(input);
+      }
+    }
+  </script>
+</html>
