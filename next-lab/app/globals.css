@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  /* @apply special:bg-purple-900; */
+}
+
+/* Called dark2 only to allow the default dark to remain (which is driven by prefers-color-scheme media query) */
+@custom-variant dark2 (&:where(.dark2, .dark2 *));
+@custom-variant special (&:where(.special, .special *));
+
+.theme-system-driven {
+  @apply bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200;
+}
+
+.theme-manual {
+  @apply bg-gray-200 text-gray-800 dark2:bg-gray-800 dark2:text-gray-200;
+}
+
+.theme-three {
+  @apply bg-gray-200 text-gray-800 dark2:bg-gray-800 dark2:text-gray-200;
+}
+
+.theme-multiple {
+  @apply bg-gray-200 text-gray-800 dark2:bg-gray-800 dark2:text-gray-200 special:bg-amber-900 special:text-blue-200;
+}
