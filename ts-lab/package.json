@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev": "npx tsc && node ./out/main.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "typescript": "^5.8.2"
+  }
+}
