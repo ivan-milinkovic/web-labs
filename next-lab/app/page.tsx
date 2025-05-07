@@ -44,6 +44,10 @@ export default function Home() {
         <Link href="theme" className={styleLink}>
           Theme
         </Link>
+        <br />
+        <Link href="context" className={styleLink}>
+          Context
+        </Link>
       </div>
       <main className={styleMain}>
         <Image
